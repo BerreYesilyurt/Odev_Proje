@@ -17,23 +17,23 @@ namespace Odev_Proje.Controllers
 
         public IActionResult Index() // Müşterilerin listelendiği ana sayfa metodudur
         {
-            var values = customerManager.TGetList();    
-            return View(values);
+            return View(); // Ekranın görünntülemek için View komutu kullanılır
         }
 
+
+
         [HttpGet]
-        public IActionResult AddCustomer() // Müşteri ekleme tuşuna bastığımızda bizi karşılayan ekranın metodudur
-        {
+        public IActionResult AddCustomer() {  // Müşteri ekleme tuşuna bastığımızda bizi karşılayan ekranın metodudur(get)
 
             return View();
 
         }
 
         [HttpPost]
-        public IActionResult AddCustomer(Customer p) // Ekleme işlemi yapmak için aksiyon gösterdiğimizde aşağıdaki kodlar çalışarak ekleme işlemi yapılır
+        public IActionResult AddCustomer(Customer p) // Ekleme işlemi yapmak için aksiyon gösterdiğimizde aşağıdaki kodlar çalışarak ekleme işlemi yapılır(post)
         {
             customerManager.TAdd(p);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index"); // Belirli bir sayfaya yönlendirilmek istenirse RedirectToAction kullanılır
 
         }
 
@@ -53,25 +53,43 @@ namespace Odev_Proje.Controllers
 
         }
 
-        public IActionResult ActivateCustomer(int id)
+
+        public IActionResult DeleteCustomer(int id) // Seçilen müşteriy silmeye yarar
         {
-            Customer customer = new Customer();
+            var values = customerManager.TGetByID(id); // Önce ID'sini bulup sonra silme işlemi yapar.
+            customerManager.TDelete(values);
+            return RedirectToAction("Index");
 
-            
+        }
 
-            if (customer.Status == true)
+        public IActionResult ActivateCustomer(int id) // Müşterinin aktif ya da pasif olma durumunu gösterir
+        {
+            var customer = customerManager.TGetByID(id);
+
+            if (customer != null)
             {
-                customer.Status = false;    
-            }
+                // Müşteri bulunursa, aktif ise pasif, pasif ise aktif yapılır
+                customer.Status = !customer.Status;
 
-            else
-            {
-                customer.Status=true;   
+                // Güncellenen müşteriyi veritabanına kaydet
+                customerManager.TUpdate(customer);
             }
 
             return RedirectToAction("Index");
 
         
+        }
+
+        public IActionResult ActiveCustomers() // Aktif müşterileri gösterir
+        {
+            var activeCustomers = customerManager.TGetList().Where(c => c.Status == true).ToList();
+            return View(activeCustomers);  
+        }
+
+        public IActionResult NotActiveCustomers() // Pasif müşterileri gösterir
+        {
+            var activeCustomers = customerManager.TGetList().Where(c => c.Status == false).ToList();
+            return View(activeCustomers);
         }
 
 
