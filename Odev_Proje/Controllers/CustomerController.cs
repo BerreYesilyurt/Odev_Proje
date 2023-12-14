@@ -33,7 +33,8 @@ namespace Odev_Proje.Controllers
         public IActionResult AddCustomer(Customer p) // Ekleme işlemi yapmak için aksiyon gösterdiğimizde aşağıdaki kodlar çalışarak ekleme işlemi yapılır(post)
         {
             customerManager.TAdd(p);
-            return RedirectToAction("Index"); // Belirli bir sayfaya yönlendirilmek istenirse RedirectToAction kullanılır
+            var values = JsonConvert.SerializeObject(p);
+            return Json(values);
 
         }
 
