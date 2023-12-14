@@ -17,6 +17,12 @@ namespace DataAccessLayer.Repository
             c.SaveChanges(); // Veri tabanına yansıması için değişikliklerin kaydedilmesi gereklidir.
         }
 
+        public T GetByID(int id)
+        {
+            using var c = new Context();
+            return c.Set<T>().Find(id);// Verilen ID değerine göre Class döner
+        }
+
         public List<T> GetList()
         {
             using var c = new Context();
