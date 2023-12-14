@@ -77,11 +77,50 @@
     </div>
 </div>
 
+
+
 <div class="row justify-content-center">
     <div class="col-lg-6">
-        <a href="/Customer/ActiveCustomers/" class="btn btn-primary btn-lg btn-block">Aktif Müşterileri Gör</a>
+        <button type="button" id="showActiveCustomers" class="btn btn-primary btn-lg btn-block">Aktif Müşterileri Gör</button>
     </div>
     <div class="col-lg-6">
-        <a href="/Customer/NotActiveCustomers/" class="btn btn-primary btn-lg btn-block">Pasif Müşterileri Gör</a>
+        <button type="button" id="showNotActiveCustomers" class="btn btn-primary btn-lg btn-block">Pasif Müşterileri Gör</button>
     </div>
 </div>
+
+<br />
+
+<div id="activeCustomersContainer">
+    <!-- AJAX ile gelecek aktif verilerin gösterileceği bir container -->
+</div>
+
+<div id="notActiveCustomersContainer">
+    <!-- AJAX ile gelecek pasif verilerin gösterileceği bir container -->
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#showActiveCustomers").click(function () {
+            loadCustomers('/Customer/ActiveCustomers', 'activeCustomersContainer'); // Aktif müşteri metodunu controllerdan çağırıyoruz
+        });
+
+        $("#showNotActiveCustomers").click(function () {
+            loadCustomers('/Customer/NotActiveCustomers', 'notActiveCustomersContainer'); // Pasif müşteri metodunu controllerdan çağırıyoruz
+        });
+
+        function loadCustomers(url, containerId) {
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (response) {
+                    $('#' + containerId).html(response);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error loading customers:', error);
+                }
+            });
+        }
+    });
+</script>

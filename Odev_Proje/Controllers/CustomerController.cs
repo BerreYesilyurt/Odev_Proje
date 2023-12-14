@@ -33,8 +33,8 @@ namespace Odev_Proje.Controllers
         public IActionResult AddCustomer(Customer p) // Ekleme işlemi yapmak için aksiyon gösterdiğimizde aşağıdaki kodlar çalışarak ekleme işlemi yapılır(post)
         {
             customerManager.TAdd(p);
-            var values = JsonConvert.SerializeObject(p);
-            return Json(values);
+            var values = JsonConvert.SerializeObject(p); // Veriler eklenirken Serialize işlemi uygulanır ve JSON formatına çevirilir
+            return Json(values); // JSON türünde döndürülür
 
         }
 
@@ -83,14 +83,20 @@ namespace Odev_Proje.Controllers
 
         public IActionResult ActiveCustomers() // Aktif müşterileri gösterir
         {
+            //var activeCustomers = customerManager.TGetList().Where(c => c.Status == true).ToList();
+            //var values = JsonConvert.SerializeObject(activeCustomers);
+            //return Json(values);
             var activeCustomers = customerManager.TGetList().Where(c => c.Status == true).ToList();
-            return View(activeCustomers);  
+            return PartialView("_ActiveCustomersPartial", activeCustomers); //  Bir Partial oluşturuyoruz ve verilerimizi veriyoruz
         }
 
         public IActionResult NotActiveCustomers() // Pasif müşterileri gösterir
         {
-            var activeCustomers = customerManager.TGetList().Where(c => c.Status == false).ToList();
-            return View(activeCustomers);
+            //var notactiveCustomers = customerManager.TGetList().Where(c => c.Status == false).ToList();
+            //var values = JsonConvert.SerializeObject(notactiveCustomers);
+            //return Json(values);
+            var notactiveCustomers = customerManager.TGetList().Where(c => c.Status == false).ToList();
+            return PartialView("_NotActiveCustomersPartial", notactiveCustomers);  //  Bir Partial oluşturuyoruz ve verilerimizi veriyoruzs
         }
 
 

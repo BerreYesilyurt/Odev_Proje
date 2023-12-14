@@ -1,0 +1,65 @@
+﻿@model List<EntityLayer.Concrete.Customer>
+
+
+@{
+    string color = ""; /*Burada,  durumun aktif ve pasif olma durumuna göre renk değiştrimesi için bir değişken atıyoruz*/
+}
+
+@{
+    string active = ""; /*Burada,  boolean değeri aktif ya da pasif olarak dönüştürmek için değer atıyoruz*/
+}
+
+@{
+    string change_activity = ""; /*Burada,  aktif olan değeri pasife, pasif olan değeri ise aktife dönüştürmek için butona ne yazdıracağımızın değerini atadık*/
+}
+
+<h3> Pasif Müşteriler</h3>
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Doğum Tarihi</th>
+            <th>Telefon Numarası</th>
+            <th>Mail</th>
+            <th>Kayıt Tarihi</th>
+            <th>Cinsiyet</th>
+            <th>Durum</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.Status == true)
+            {
+                color = "badge badge-success";
+                active = "Aktif";
+                change_activity = "Pasif";
+
+            }
+
+            if (item.Status == false)
+            {
+                color = "badge badge-danger";
+                active = "Pasif";
+                change_activity = "Aktif";
+
+            }
+            <tr>
+                <td>@item.CustomerID</td>
+                <td>@item.Name</td>
+                <td>@item.Surname</td>
+                <td>@item.DateOfBirth.ToString("dd.MM.yyyy")</td> @*Böylece sadece tarih formatı alınmış olunur*@
+                <td>@item.PhoneNumber</td>
+                <td>@item.Mail</td>
+                <td>@item.RegistrationDate</td>
+                <td>@item.Gender</td>
+                <td><span class="@color">@active</span></td>
+            </tr>
+
+        }
+    </tbody>
+</table>
