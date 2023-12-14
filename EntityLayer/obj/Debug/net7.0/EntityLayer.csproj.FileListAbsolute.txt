@@ -1,0 +1,14 @@
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\EntityLayer\bin\Debug\net7.0\EntityLayer.deps.json
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\EntityLayer\bin\Debug\net7.0\EntityLayer.runtimeconfig.json
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\EntityLayer\bin\Debug\net7.0\EntityLayer.dll
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\EntityLayer\bin\Debug\net7.0\EntityLayer.pdb
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\EntityLayer\obj\Debug\net7.0\EntityLayer.csproj.AssemblyReference.cache
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\EntityLayer\obj\Debug\net7.0\EntityLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\EntityLayer\obj\Debug\net7.0\EntityLayer.AssemblyInfoInputs.cache
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\EntityLayer\obj\Debug\net7.0\EntityLayer.AssemblyInfo.cs
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\EntityLayer\obj\Debug\net7.0\EntityLayer.csproj.CoreCompileInputs.cache
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\EntityLayer\obj\Debug\net7.0\EntityLayer.dll
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\EntityLayer\obj\Debug\net7.0\refint\EntityLayer.dll
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\EntityLayer\obj\Debug\net7.0\EntityLayer.pdb
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\EntityLayer\obj\Debug\net7.0\EntityLayer.genruntimeconfig.cache
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\EntityLayer\obj\Debug\net7.0\ref\EntityLayer.dll

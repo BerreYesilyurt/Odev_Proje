@@ -1,0 +1,17 @@
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\DataAccessLayer\obj\Debug\net7.0\DataAccessLayer.csproj.AssemblyReference.cache
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\DataAccessLayer\obj\Debug\net7.0\DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\DataAccessLayer\obj\Debug\net7.0\DataAccessLayer.AssemblyInfoInputs.cache
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\DataAccessLayer\obj\Debug\net7.0\DataAccessLayer.AssemblyInfo.cs
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\DataAccessLayer\obj\Debug\net7.0\DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\DataAccessLayer\bin\Debug\net7.0\DataAccessLayer.deps.json
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\DataAccessLayer\bin\Debug\net7.0\DataAccessLayer.runtimeconfig.json
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\DataAccessLayer\bin\Debug\net7.0\DataAccessLayer.dll
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\DataAccessLayer\bin\Debug\net7.0\DataAccessLayer.pdb
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\DataAccessLayer\bin\Debug\net7.0\EntityLayer.dll
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\DataAccessLayer\bin\Debug\net7.0\EntityLayer.pdb
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\DataAccessLayer\obj\Debug\net7.0\DataAccessLayer.csproj.CopyComplete
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\DataAccessLayer\obj\Debug\net7.0\DataAccessLayer.dll
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\DataAccessLayer\obj\Debug\net7.0\refint\DataAccessLayer.dll
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\DataAccessLayer\obj\Debug\net7.0\DataAccessLayer.pdb
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\DataAccessLayer\obj\Debug\net7.0\DataAccessLayer.genruntimeconfig.cache
+C:\Users\Monster_Pc\source\repos\25 Uygulamalı Proje\Odev_Proje\DataAccessLayer\obj\Debug\net7.0\ref\DataAccessLayer.dll
