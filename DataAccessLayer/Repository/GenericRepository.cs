@@ -18,90 +18,39 @@ namespace DataAccessLayer.Repository
 {
     public class GenericRepository<T> : IGenericDal<T> where T : class
     {
-        // Dapper direkt veri tabanından işlemleri çektiği için veri tabanına bağlantı kurmalıyız
-        //private readonly string _connectionString= "server=(localdb)\\MSSQLLocalDB;database=Biletleme;integrated security=true";
+        
+        private readonly UnitOfWork _unitOfWork; // UnitOfWork sınıfından bir nesne
 
-        //public GenericRepository(string connectionString)
-        //{
-        //    _connectionString = connectionString;
-        //}
-
-        private readonly UnitOfWork _unitOfWork;
-
-        public GenericRepository(UnitOfWork unitOfWork)
+        public GenericRepository(UnitOfWork unitOfWork) // Constructor'a parametre olarak unitofwork sınıfı türünden bir parametre verildi
         {
             _unitOfWork = unitOfWork;
         }
 
         public void Delete(T t) // Dapper ile Silme İşlemi
         {
-            //using var c = new Context(); // using ile işlem bittikten hemen sonra bellekten atılır
-            //c.Remove(t); // t nesnesini kaldırır(EF Core metodu ile)
-            //c.SaveChanges(); // Veri tabanına yansıması için değişikliklerin kaydedilmesi gereklidir.
-
-            //using (IDbConnection dbConnection = new SqlConnection(_connectionString))
-            //{ // Bağlantı adresinden veri tabanına bağlantı sağladık
-
-            //    var idProperty = t.GetType().GetProperty("CustomerID");
-            //    if (idProperty != null) // Verilen ID değeri varsa
-            //    {
-            //        var idValue = idProperty.GetValue(t, null);
-
-            //        string tableName = typeof(T).Name; // Tablonun adı alınır
-            //        string deleteQuery = $"DELETE FROM {tableName} WHERE CustomerID = @CustomerID"; // Tablo adı üzerinden uygun id değeri için arama yapılır
-
-            //        dbConnection.Execute(deleteQuery, new { CustomerID = idValue });
-            //    }
-            //    else
-            //    {
-            //        throw new InvalidOperationException("Entity doesn't have a property named 'CustomerID'");
-            //    }
-            //}
-
-            var idProperty = t.GetType().GetProperty("CustomerID");
-            if (idProperty != null)
+            var idProperty = t.GetType().GetProperty("CustomerID"); // CustomerID özellikli sütunu alır
+            if (idProperty != null) // Null değilse devam eder
             {
-                var idValue = idProperty.GetValue(t, null);
+                var idValue = idProperty.GetValue(t, null); // Özelliğin değerini alır
 
-                string tableName = typeof(T).Name;
-                string deleteQuery = $"DELETE FROM {tableName} WHERE CustomerID = @CustomerID";
+                string tableName = typeof(T).Name; // Tablo adını alır
+                string deleteQuery = $"DELETE FROM {tableName} WHERE CustomerID = @CustomerID"; // Verilen parametreyle sütun adının eşleştiği sorguyu bulur
 
-                _unitOfWork.Connection.Execute(deleteQuery, new { CustomerID = idValue }, _unitOfWork.Transaction);
+                _unitOfWork.Connection.Execute(deleteQuery, new { CustomerID = idValue }, _unitOfWork.Transaction); // Sorguyu çalıştırır
             }
             else
             {
-                throw new InvalidOperationException("Entity doesn't have a property named 'CustomerID'");
+                throw new InvalidOperationException("Entity doesn't have a property named 'CustomerID'"); // Değer null dönerse hata fırlatır
             }
         }
 
-        public T GetByID(int id) // İstediğimiz id değerinin tablosunun getirilmesi
-        {
-            //using var c = new Context();
-            //return c.Set<T>().Find(id);// Verilen ID değerine göre Class döner
-
-            //using (IDbConnection dbConnection = new SqlConnection(_connectionString))
-            //{
-            //    string tableName = typeof(T).Name;
-            //    string selectQuery = $"SELECT * FROM {tableName} WHERE CustomerID = @CustomerID";
-
-            //    var result=dbConnection.QueryFirstOrDefault<T>(selectQuery, new { CustomerID = id }); // Id değerine uyan sorgu döndürülür
-
-            //    if (result != null)
-            //    {
-            //        return result;
-            //    }
-            //    else
-            //    {
-            //        // Burada uygun bir işlem veya alternatif değeri dönebilirsiniz.
-            //        throw new InvalidOperationException("Kayıt bulunamadı");
-            //    }
-
-            //}
+        public T GetByID(int id) // İstediğimiz id değerli sorgunun getirilmesi
+        {          
 
             string tableName = typeof(T).Name;
             string selectQuery = $"SELECT * FROM {tableName} WHERE CustomerID = @CustomerID";
 
-            var result = _unitOfWork.Connection.QueryFirstOrDefault<T>(selectQuery, new { CustomerID = id }, _unitOfWork.Transaction);
+            var result = _unitOfWork.Connection.QueryFirstOrDefault<T>(selectQuery, new { CustomerID = id }, _unitOfWork.Transaction); // Bulunan T değerini result değişkenine atar
 
             if (result != null)
             {
@@ -116,45 +65,21 @@ namespace DataAccessLayer.Repository
 
         public List<T> GetList()
         {
-            //using var c = new Context();
-            //return c.Set<T>().ToList(); // Verileri listeler
-
-            //using (IDbConnection dbConnection = new SqlConnection(_connectionString))
-            //{
-            //    string tableName = typeof(T).Name;
-            //    string selectQuery = $"SELECT * FROM {tableName}";
-
-            //    return dbConnection.Query<T>(selectQuery).ToList();
-            //}
 
             string tableName = typeof(T).Name;
             string selectQuery = $"SELECT * FROM {tableName}";
 
-            return _unitOfWork.Connection.Query<T>(selectQuery, transaction: _unitOfWork.Transaction).ToList();
+            return _unitOfWork.Connection.Query<T>(selectQuery, transaction: _unitOfWork.Transaction).ToList(); // Burada direk olarak tablodaki değerleri listeler
         }
 
         public void Insert(T t)
         {
-            //using var c = new Context();
-            //c.Add(t); // Veriyi ekler
-            //c.SaveChanges();  // Veri tabanına yansıması için değişikliklerin kaydedilmesi gereklidir.  
-
-            //using (IDbConnection dbConnection = new SqlConnection(_connectionString))
-            //{
-            //    string tableName = typeof(T).Name;
-            //    string columns = string.Join(", ", typeof(T).GetProperties().Select(p => p.Name)); // Tablonun özellikleri(sütunlar) , ile ayrılır.
-            //    string values = string.Join(", ", typeof(T).GetProperties().Select(p => "@" + p.Name)); // @ eklenerek özellikler parametrelere dönüştürülür
-
-            //    string insertQuery = $"INSERT INTO {tableName} ({columns}) VALUES ({values})"; // Sütunların içerisine parametreler eklenir
-
-            //    dbConnection.Execute(insertQuery, t); // Sorgu çalıştırılır
-            //}
 
             string tableName = typeof(T).Name;
-            string columns = string.Join(", ", typeof(T).GetProperties().Select(p => p.Name));
-            string values = string.Join(", ", typeof(T).GetProperties().Select(p => "@" + p.Name));
+            string columns = string.Join(", ", typeof(T).GetProperties().Select(p => p.Name)); // Özellikleri(sütun ayırır)
+            string values = string.Join(", ", typeof(T).GetProperties().Select(p => "@" + p.Name)); // Değişkenleri belirler
 
-            string insertQuery = $"INSERT INTO {tableName} ({columns}) VALUES ({values})";
+            string insertQuery = $"INSERT INTO {tableName} ({columns}) VALUES ({values})"; // Sütunlar ile uyan değişkenleri eşleştirir
 
             _unitOfWork.Connection.Execute(insertQuery, t, _unitOfWork.Transaction);
         }
@@ -162,28 +87,6 @@ namespace DataAccessLayer.Repository
 
         public void Update(T t)
         {
-            //using var c = new Context();
-            //c.Update(t); // Veriyi günceller
-            //c.SaveChanges();  // Veri tabanına yansıması için değişikliklerin kaydedilmesi gereklidir.  
-
-            //using (IDbConnection dbConnection = new SqlConnection(_connectionString))
-            //{
-            //    string tableName = typeof(T).Name;
-            //    string updateQuery = $"UPDATE {tableName} SET ";
-
-            //    var properties = typeof(T).GetProperties().Where(p => !p.Name.Equals("CustomerID")).ToList(); // ID sütunu haricindeki sütunları alır. ID güncellenmez.
-
-            //    foreach (var prop in properties)
-            //    {
-            //        updateQuery += $"{prop.Name} = @{prop.Name}, "; // Sütunlar ve parametreler eşleştirilir
-            //    }
-
-            //    updateQuery = updateQuery.TrimEnd(',', ' ');
-
-            //    updateQuery += " WHERE CustomerID = @CustomerID";
-
-            //    dbConnection.Execute(updateQuery, t); // Sorgu çalıştırılır
-            //}
 
             string tableName = typeof(T).Name;
             string updateQuery = $"UPDATE {tableName} SET ";
@@ -192,13 +95,13 @@ namespace DataAccessLayer.Repository
 
             foreach (var prop in properties)
             {
-                updateQuery += $"{prop.Name} = @{prop.Name}, ";
+                updateQuery += $"{prop.Name} = @{prop.Name}, "; // Tüm özellikler üzerinde döner ve sütun parametre eşleştirmesi yapar
             }
 
             updateQuery = updateQuery.TrimEnd(',', ' ');
             updateQuery += " WHERE CustomerID = @CustomerID";
 
-            _unitOfWork.Connection.Execute(updateQuery, t, _unitOfWork.Transaction);
+            _unitOfWork.Connection.Execute(updateQuery, t, _unitOfWork.Transaction); // Sorguyu çalıştırır
 
 
         }

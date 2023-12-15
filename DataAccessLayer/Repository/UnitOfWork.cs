@@ -10,31 +10,31 @@ namespace DataAccessLayer.Repository
 {
     public class UnitOfWork : IDisposable
     {
-        private readonly IDbConnection _dbConnection;
-        private IDbTransaction _dbTransaction;
-        private bool _disposed = false;
+        private readonly IDbConnection _dbConnection; // Veri tabanı ile bağlantı içindir
+        private IDbTransaction _dbTransaction; // İşlemlerin gerçekleştirilmesi için
+        private bool _disposed = false; // İlk başta verilerin serbest bırakma işlemi olamdığı için "falseé'dur
 
-        public UnitOfWork(string connectionString)
+        public UnitOfWork(string connectionString) // Veri tabanı bağlantı adresini constructor üzerinde alıyoruz
         {
-            _dbConnection = new SqlConnection(connectionString);
-            _dbConnection.Open();
-            _dbTransaction = _dbConnection.BeginTransaction();
+            _dbConnection = new SqlConnection(connectionString); // Bağlantı oluşturuyoruz
+            _dbConnection.Open(); // Bağlantı açılır
+            _dbTransaction = _dbConnection.BeginTransaction(); // İşlemler başlar
         }
 
         public IDbConnection Connection => _dbConnection;
         public IDbTransaction Transaction => _dbTransaction;
 
-        public void Commit()
+        public void Commit() // İşlem başarılı olursa çalışır ve verileri toplu olarak kalıcı hale getirir
         {
             _dbTransaction?.Commit();
         }
 
-        public void Rollback()
+        public void Rollback() // Eğer işlem başarılı olmazsa işlemi geri alır
         {
             _dbTransaction?.Rollback();
         }
 
-        public void Dispose()
+        public void Dispose() 
         {
             Dispose(true);
             GC.SuppressFinalize(this);
@@ -51,11 +51,11 @@ namespace DataAccessLayer.Repository
                     _dbConnection?.Dispose();
                 }
 
-                _disposed = true;
+                _disposed = true; // Başlangıçta false olan değer, serbest bırakılmayla birlikte true'ya döner
             }
         }
 
-        ~UnitOfWork()
+        ~UnitOfWork() 
         {
             Dispose(false);
         }
