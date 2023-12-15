@@ -21,7 +21,6 @@ namespace Odev_Proje.Controllers
         }
 
 
-
         [HttpGet]
         public IActionResult AddCustomer() {  // Müşteri ekleme tuşuna bastığımızda bizi karşılayan ekranın metodudur(get)
 

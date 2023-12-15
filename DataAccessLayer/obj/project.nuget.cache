@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Qoc7rHWBNGcttPqVRdcKpdSffjxvhOidh7MGwYSYEpJawhNlmUDGxCkDJXJiGT9H6YBDRXqjMZ7Gv90OEtodzA==",
+  "dgSpecHash": "k4gG6zlvd0lDv3XvFJqv5y4KYOq5qdAJvip1Wn/hpoF1548pDC+KAppIL/m/ireDOMEHkKvTMqx6cQjMFz9krA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Monster_Pc\\source\\repos\\25 Uygulamalı Proje\\Odev_Proje\\DataAccessLayer\\DataAccessLayer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Monster_Pc\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Monster_Pc\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\Monster_Pc\\.nuget\\packages\\dapper\\2.1.24\\dapper.2.1.24.nupkg.sha512",
     "C:\\Users\\Monster_Pc\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Monster_Pc\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Monster_Pc\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
